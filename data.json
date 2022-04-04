@@ -1,0 +1,148 @@
+{
+    "employee": [
+        {
+            "name": {
+                "first": "Akash",
+                "middle": null,
+                "last": "Tripathi"
+            },
+            "emailId": "xyz@practo.com",
+            "phoneNumber": 1234567890,
+            "gender": "Male",
+            "age": "24",
+            "team": "Marketplace UI",
+            "manager": "Keshav Kumar",
+            "address": {
+                "lineOne": "first line",
+                "lineTwo": "first line",
+                "city": "dummy city",
+                "state": "Uttar Pradesh",
+                "pincode": 123456
+            },
+            "id": {
+                "idType": "Aadhar Card",
+                "idNumber": "01234567898432"
+            }
+        },
+        {
+            "name": {
+                "first": "Dummy",
+                "middle": null,
+                "last": "Name"
+            },
+            "emailId": "abc@practo.com",
+            "phoneNumber": 111111111,
+            "gender": "Female",
+            "age": "21",
+            "team": "CX",
+            "manager": "don dummy",
+            "address": {
+                "lineOne": "first line",
+                "lineTwo": "first line",
+                "city": "dummy city",
+                "state": "Uttar Pradesh",
+                "pincode": 123456
+            },
+            "id": {
+                "idType": "Pan Card",
+                "idNumber": "BYMPT1234GH"
+            }
+        },
+        {
+            "name": {
+                "first": "Akash",
+                "middle": null,
+                "last": "Tripathi"
+            },
+            "emailId": "xyz@practo.com",
+            "phoneNumber": 1234567890,
+            "gender": "Male",
+            "age": "24",
+            "team": "Marketplace UI",
+            "manager": "Keshav Kumar",
+            "address": {
+                "lineOne": "first line",
+                "lineTwo": "first line",
+                "city": "dummy city",
+                "state": "Uttar Pradesh",
+                "pincode": 123456
+            },
+            "id": {
+                "idType": "Aadhar Card",
+                "idNumber": "01234567898432"
+            }
+        },
+        {
+            "name": {
+                "first": "Dummy",
+                "middle": null,
+                "last": "Name"
+            },
+            "emailId": "abc@practo.com",
+            "phoneNumber": 111111111,
+            "gender": "Female",
+            "age": "21",
+            "team": "CX",
+            "manager": "don dummy",
+            "address": {
+                "lineOne": "first line",
+                "lineTwo": "first line",
+                "city": "dummy city",
+                "state": "Uttar Pradesh",
+                "pincode": 123456
+            },
+            "id": {
+                "idType": "Pan Card",
+                "idNumber": "BYMPT1234GH"
+            }
+        },
+        {
+            "name": {
+                "first": "Akash",
+                "middle": null,
+                "last": "Tripathi"
+            },
+            "emailId": "xyz@practo.com",
+            "phoneNumber": 1234567890,
+            "gender": "Male",
+            "age": "24",
+            "team": "Marketplace UI",
+            "manager": "Keshav Kumar",
+            "address": {
+                "lineOne": "first line",
+                "lineTwo": "first line",
+                "city": "dummy city",
+                "state": "Telangana",
+                "pincode": 123456
+            },
+            "id": {
+                "idType": "Aadhar Card",
+                "idNumber": "01234567898432"
+            }
+        },
+        {
+            "name": {
+                "first": "Dummy",
+                "middle": null,
+                "last": "Name"
+            },
+            "emailId": "abc@practo.com",
+            "phoneNumber": 111111111,
+            "gender": "Female",
+            "age": "21",
+            "team": "CX",
+            "manager": "don dummy",
+            "address": {
+                "lineOne": "first line",
+                "lineTwo": "first line",
+                "city": "dummy city",
+                "state": "Telangana",
+                "pincode": 123456
+            },
+            "id": {
+                "idType": "Pan Card",
+                "idNumber": "BYMPT1234GH"
+            }
+        }
+    ]
+}

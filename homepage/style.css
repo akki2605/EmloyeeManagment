@@ -1,0 +1,111 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300&display=swap");
+
+body {
+  /* padding: 2%; */
+  background-color: rgb(238, 238, 238);
+}
+header {
+  text-align: center;
+}
+
+h1,h2 {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.add, .export,.submit {
+  cursor: pointer;
+  padding: 0.7em 1.7em;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  transition: all 0.1s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.submit{
+  margin-bottom: 20px;
+  margin-left: 38rem;
+}
+
+.add:active, .export:active , .submit:active{
+  box-shadow: 2px 2px 12px #c5c5c5, -2px -2px 12px #ffffff;
+}
+
+.grid-item {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 0.5fr));
+}
+
+.card {
+  cursor: pointer;
+  display: flex;
+  background-color: aliceblue;
+  height: 150px;
+  width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 3rem 6rem rgb(0, 0, 0, 0.1);
+  transition: 0.3s;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+/* img{
+  padding: 2%;
+  border-radius: 50%;
+} */
+.del {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 375px;
+  transform: scale(170%);
+}
+
+.card:hover {
+  transform: translateY(-2%);
+  box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.4);
+}
+.container {
+  padding: 2px 16px;
+}
+
+p {
+  padding-top: 5px;
+  margin-block: auto;
+  font-size: 15px;
+}
+p.name {
+  margin-block-start: 1em;
+  margin-block-end: auto;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-size: 20px;
+  
+}
+
+p.age-gender, p.team{
+  font-weight: bold;
+  font-family: "Red Hat Mono", monospace;
+}
+
+
+p.manager {
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+}
+
+
