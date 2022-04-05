@@ -195,46 +195,49 @@ document.getElementById('submit').addEventListener('click', function () {
   //validating the inputs
   if (newEmployee.name.first && newEmployee.name.last && newEmployee.emailId && newEmployee.phoneNumber && newEmployee.age && newEmployee.team && newEmployee.manager && newEmployee.address.lineOne && newEmployee.address.city && newEmployee.address.pincode && newEmployee.identity.idNumber ) {
     if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newEmployee.emailId)){
+      if(/^[6-9]\d{9}$/.test(newEmployee.phoneNumber) && newEmployee.phoneNumber.length === 10){
+          if (!isNaN(parseInt(newEmployee.age, 10)) && parseInt(newEmployee.age, 10) > 0) {
+            var msg = "";
+            if (newEmployee.identity.idType === "Aadhar Card" ) {
+              var regex = /^[2-9]\d{3}\d{4}\d{4}$/;
+              if (!regex.test(newEmployee.identity.idNumber) || !(newEmployee.identity.idNumber.length === 12)) msg = "Enter Valid Aadhar";
+              else msg = "";
+            }
 
-      if (!isNaN(parseInt(newEmployee.age, 10)) && parseInt(newEmployee.age, 10) > 0) {
-        var msg = "";
-        if (newEmployee.identity.idType === "Aadhar Card" ) {
-          var regex = /^[2-9]\d{3}\d{4}\d{4}$/;
-          if (!regex.test(newEmployee.identity.idNumber) || !(newEmployee.identity.idNumber.length === 12)) msg = "Enter Valid Aadhar";
-          else msg = "";
+            if (newEmployee.identity.idType === "Pan Card") {
+              var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+              if (!regex.test(newEmployee.identity.idNumber)) msg = "Enter Valid PAN";
+              else msg = "";
+            }
+            
+            if (newEmployee.identity.idType === "Driving Licence") {
+              var regex =
+                /^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$/;
+              if (!regex.test(newEmployee.identity.idNumber))
+                msg = "Enter Valid Driving Licence number";
+              else msg = "";
+            }
+            if (msg != "") 
+              alert(msg);
+            else if((newEmployee.address.pincode))
+            {
+              var regex=/^[1-9]{1}[0-9]{2}[0-9]{3}$/;
+              if(!regex.test(newEmployee.address.pincode))
+                alert("Enter valid pincode");
+              else{
+                toUpdateEmployee.splice(index, 1, newEmployee);
+                localStorage.setItem("employee", JSON.stringify(toUpdateEmployee));
+                location.reload();
+              }
+            }
+        } 
+        else {
+          alert("Enter a valid Age !!!!!");
         }
-
-        if (newEmployee.identity.idType === "Pan Card") {
-          var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-          if (!regex.test(newEmployee.identity.idNumber)) msg = "Enter Valid PAN";
-          else msg = "";
-        }
-        
-        if (newEmployee.identity.idType === "Driving Licence") {
-          var regex =
-            /^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$/;
-          if (!regex.test(newEmployee.identity.idNumber))
-            msg = "Enter Valid Driving Licence number";
-          else msg = "";
-        }
-        if (msg != "") 
-          alert(msg);
-        else if((newEmployee.address.pincode))
-        {
-          var regex=/^[1-9]{1}[0-9]{2}[0-9]{3}$/;
-          if(!regex.test(newEmployee.address.pincode))
-            alert("Enter valid pincode");
-          else{
-            toUpdateEmployee.splice(index, 1, newEmployee);
-            localStorage.setItem("employee", JSON.stringify(toUpdateEmployee));
-            location.reload();
-          }
-        }
-    } 
-    else {
-      alert("Enter a valid Age !!!!!");
-    }
-      
+      }
+      else{
+        alert("enter vaid Mobile number")
+      }       
     }else{
       alert("Enter a valid EmailId")
     }

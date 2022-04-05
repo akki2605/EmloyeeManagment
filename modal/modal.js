@@ -76,6 +76,7 @@ document.getElementById("submit").addEventListener("click", () => {
   //validation
    if (newEmployee.name.first && newEmployee.name.last && newEmployee.emailId && newEmployee.phoneNumber && newEmployee.age && newEmployee.team && newEmployee.manager && newEmployee.address.lineOne && newEmployee.address.city && newEmployee.address.pincode && newEmployee.identity.idNumber ) {
       if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newEmployee.emailId)){
+      if(/^[6-9]\d{9}$/.test(newEmployee.phoneNumber) && newEmployee.phoneNumber.length === 10){
 
         if (!isNaN(parseInt(newEmployee.age, 10)) && parseInt(newEmployee.age, 10) > 0) {
           var msg = "";
@@ -106,10 +107,10 @@ document.getElementById("submit").addEventListener("click", () => {
             if(!regex.test(newEmployee.address.pincode))
               alert("Enter valid pincode");
             else{
-               //creatinmg id of new employee
-               const lastId = localStorage.getItem("lastEmpId") || 1000;
-               newEmployee.id = lastId +1;
-               localStorage.setItem('lastEmpId',newEmployee.id);
+              //creatinmg id of new employee
+              const lastId = localStorage.getItem("lastEmpId") || 1000;
+              newEmployee.id = lastId +1;
+              localStorage.setItem('lastEmpId',newEmployee.id);
 
               var employee = JSON.parse(localStorage.getItem("employee"));
               employee.push(newEmployee);
@@ -120,12 +121,15 @@ document.getElementById("submit").addEventListener("click", () => {
               location.reload();
             }
           }
-      } 
-      else {
-        alert("Enter a valid Age !!!!!");
-      }
-        
+        } 
+        else {
+          alert("Enter a valid Age !!!!!");
+        }
       }else{
+        alert("enter vaid Mobile number")
+      } 
+      }
+      else{
         alert("Enter a valid EmailId")
       }
   } 

@@ -26,6 +26,7 @@ document.querySelector(".bg-modal").innerHTML += `
                 type="number"
                 id="modalNumber"
                 name="number"
+                pattern="^[6-9]\d{9}$"
                 size="10"
                 required
               />
