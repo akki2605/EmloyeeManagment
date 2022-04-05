@@ -2,8 +2,16 @@ const urlParam = new URLSearchParams(location.search);
 const id = urlParam.get("id");
 const grid = document.querySelector(".full");
 var toUpdateEmployee = JSON.parse(localStorage.employee);
-
-var employee = JSON.parse(localStorage.employee)[id];
+var index;
+var employee = JSON.parse(localStorage.employee);
+for (let i = 0; i < employee.length; i++) {
+  if(id== employee[i].id)
+  {
+    index = i;
+    employee = employee[i];
+    break;
+  } 
+}
 
 (() => {
   // console.log(employee);
@@ -61,9 +69,9 @@ var employee = JSON.parse(localStorage.employee)[id];
     "<b>Team : </b>" + employee.team + " <b>Manager : </b>" + employee.manager;
   idType.innerHTML =
     "<b> Id : </b>" +
-    employee.id.idType +
+    employee.identity.idType +
     " <b>No. : </b>" +
-    employee.id.idNumber;
+    employee.identity.idNumber;
   address.innerHTML =
     "<b>Address :</b> " +
     employee.address.lineOne +
@@ -103,13 +111,13 @@ var newEmployee = {
     state: null,
     pincode: null,
   },
-
-  id: {
+  id:null,
+  identity: {
     idType: null,
     idNumber: null,
-  },
+  }
 };
-
+//add empluyee id
 // pre populating the modal
 (() => {
   document.getElementById("modalFirst").value = employee.name.first;
@@ -123,13 +131,13 @@ var newEmployee = {
     employee.gender.toUpperCase() == "MALE" ? 0 : 1;
   document.getElementById("modalAge").value = employee.age;
   document.getElementById("modalIdType").selectedIndex =
-    employee.id.idType == "Aadhar Card"
+    employee.identity.idType == "Aadhar Card"
       ? 0
-      : employee.id.idType == "Pan Card"
+      : employee.identity.idType == "Pan Card"
       ? 1
       : 2;
 
-  document.getElementById("modalIdValue").value = employee.id.idNumber;
+  document.getElementById("modalIdValue").value = employee.identity.idNumber;
   document.getElementById("modalTeam").value = employee.team;
   document.getElementById("modalManager").value = employee.manager;
   document.getElementById("lineOne").value = employee.address.lineOne;
@@ -146,8 +154,10 @@ var newEmployee = {
   document.getElementById("modalPin").value = employee.address.pincode;
 })();
 
-//geting updated value
-function update() {
+
+document.getElementById('submit').addEventListener('click', function () {
+
+
   newEmployee.name.first = document.getElementById("modalFirst").value;
   newEmployee.name.middle =
     document.getElementById("modalMiddle").value != ""
@@ -177,86 +187,71 @@ function update() {
   newEmployee.address.pincode = document.getElementById("modalPin").value;
 
   var selectId = document.getElementById("modalIdType");
-  newEmployee.id.idType = selectId.options[selectId.selectedIndex].value;
-  newEmployee.id.idNumber = document.getElementById("modalIdValue").value;
+  newEmployee.identity.idType = selectId.options[selectId.selectedIndex].value;
+  newEmployee.identity.idNumber = document.getElementById("modalIdValue").value;
 
-  if (
-    newEmployee.name.first &&
-    newEmployee.name.last &&
-    newEmployee.emailId &&
-    newEmployee.phoneNumber &&
-    newEmployee.age &&
-    newEmployee.team &&
-    newEmployee.manager &&
-    newEmployee.address.lineOne &&
-    newEmployee.address.city &&
-    newEmployee.address.pincode &&
-    newEmployee.id.idNumber
-  ) {
-    if (
-      !isNaN(parseInt(newEmployee.age, 10)) &&
-      parseInt(newEmployee.age, 10) > 0
-    ) {
-      var mes = "";
-      if (newEmployee.id.idType === "Aadhar Card") {
-        var regex = /^[2-9]\d{3}[\s-]?\d{4}[\s-]?\d{4}$/;
-        if (!regex.test(newEmployee.id.idNumber)) msg = "Enter Valid Aadhar";
-        else msg = "";
-      }
+  newEmployee.id=employee.id;
 
-      if (newEmployee.id.idType === "Pan Card") {
-        var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-        if (!regex.test(newEmployee.id.idNumber)) msg = "Enter Valid PAN";
-        else msg = "";
-      }
-      if (newEmployee.id.idType === "Driving Licence") {
-        //     Where:
-        // ^ represents the starting of the string.
-        // ( represents the starting of group 1.
-        // ( represents the starting of group 2.
-        // [A-Z]{2} represents the first two characters should be upper case alphabets.
-        // [0-9]{2} represents the next two characters should be digits.
-        // ) represents the ending of the group 2.
-        // ( ) represents the white space character.
-        // | represents the or.
-        // ( represents the starting of group 3.
-        // [A-Z]{2} represents the first two characters should be upper case alphabets.
-        // – represents the hyphen.
-        // [0-9]{2} represents the next two characters should be digits.
-        // ) represents the ending of the group 3.
-        // ) represents the ending of the group 1.
-        // ((19|20)[0-9][0-9]) represents the year from 1900-2099.
-        // [0-9]{7} represents the next seven characters should be any digits from 0-9.
-        // $ represents the ending of the string.
-        var regex =
-          /^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$/;
-        if (!regex.test(newEmployee.id.idNumber))
-          msg = "Enter Valid Driving Licence number";
-        else msg = "";
-      }
+  //validating the inputs
+  if (newEmployee.name.first && newEmployee.name.last && newEmployee.emailId && newEmployee.phoneNumber && newEmployee.age && newEmployee.team && newEmployee.manager && newEmployee.address.lineOne && newEmployee.address.city && newEmployee.address.pincode && newEmployee.identity.idNumber ) {
+    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newEmployee.emailId)){
 
-      {
-        if (newEmployee.address.pincode)
-          var regex = /^[1-9]{1}[0-9]{2}[0-9]{3}$/;
-        if (!regex.test(newEmployee.address.pincode))
-          msg = "Enter valid pincode";
-        else msg = "";
-      }
+      if (!isNaN(parseInt(newEmployee.age, 10)) && parseInt(newEmployee.age, 10) > 0) {
+        var msg = "";
+        if (newEmployee.identity.idType === "Aadhar Card" ) {
+          var regex = /^[2-9]\d{3}\d{4}\d{4}$/;
+          if (!regex.test(newEmployee.identity.idNumber) || !(newEmployee.identity.idNumber.length === 12)) msg = "Enter Valid Aadhar";
+          else msg = "";
+        }
 
-      if (msg != "") alert(msg);
-      else {
-        toUpdateEmployee.splice(id, 1, newEmployee);
-        localStorage.setItem("employee", JSON.stringify(toUpdateEmployee));
-        location.reload();
-      }
-    } else {
+        if (newEmployee.identity.idType === "Pan Card") {
+          var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+          if (!regex.test(newEmployee.identity.idNumber)) msg = "Enter Valid PAN";
+          else msg = "";
+        }
+        
+        if (newEmployee.identity.idType === "Driving Licence") {
+          var regex =
+            /^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$/;
+          if (!regex.test(newEmployee.identity.idNumber))
+            msg = "Enter Valid Driving Licence number";
+          else msg = "";
+        }
+        if (msg != "") 
+          alert(msg);
+        else if((newEmployee.address.pincode))
+        {
+          var regex=/^[1-9]{1}[0-9]{2}[0-9]{3}$/;
+          if(!regex.test(newEmployee.address.pincode))
+            alert("Enter valid pincode");
+          else{
+            toUpdateEmployee.splice(index, 1, newEmployee);
+            localStorage.setItem("employee", JSON.stringify(toUpdateEmployee));
+            location.reload();
+          }
+        }
+    } 
+    else {
       alert("Enter a valid Age !!!!!");
     }
-  } else {
-    alert("please Enter all details!!!!!");
-  }
+      
+    }else{
+      alert("Enter a valid EmailId")
+    }
+} 
+else{
+  alert("please Enter all details!!!!!");
 }
+  
+});
+//geting updated value
+
 
 document.querySelector(".closeModal").addEventListener("click", function () {
   document.querySelector(".bg-modal").style.display = "none";
 });
+
+
+//toUpdateEmployee.splice(index, 1, newEmployee);
+        // localStorage.setItem("employee", JSON.stringify(toUpdateEmployee));
+        // location.reload();

@@ -26,123 +26,110 @@ var newEmployee = {
     state: null,
     pincode: null,
   },
+  id:null,
 
-  id: {
+  identity: {
     idType: null,
     idNumber: null,
   },
 };
 
 document.getElementById("submit").addEventListener("click", () => {
-  newEmployee.name.first = document.querySelector("#first").value;
+  
+  newEmployee.name.first = document.getElementById("modalFirst").value;
   newEmployee.name.middle =
-    document.querySelector("#middle").value != ""
-      ? document.querySelector("#middle").value
+    document.getElementById("modalMiddle").value != ""
+      ? document.getElementById("modalMiddle").value
       : null;
-  newEmployee.name.last = document.querySelector("#last").value;
-  // console.log(newEmployee);
+  newEmployee.name.last = document.getElementById("modalLast").value;
 
-  newEmployee.emailId = document.querySelector("#email").value;
+  newEmployee.emailId = document.getElementById("modalEmail").value;
 
-  newEmployee.phoneNumber = document.querySelector("#number").value;
+  newEmployee.phoneNumber = document.getElementById("modalNumber").value;
 
-  var selectGender = document.getElementById("gender");
+  var selectGender = document.getElementById("modalGender");
   newEmployee.gender = selectGender.options[selectGender.selectedIndex].value;
 
-  newEmployee.age = document.getElementById("age").value;
+  newEmployee.age = document.getElementById("modalAge").value;
 
-  newEmployee.team = document.getElementById("team").value;
-  newEmployee.manager = document.getElementById("manager").value;
+  newEmployee.team = document.getElementById("modalTeam").value;
+  newEmployee.manager = document.getElementById("modalManager").value;
 
   //updating address
-  newEmployee.address.lineOne = document.querySelector(".lineOne").value;
-  newEmployee.address.lineTwo = document.querySelector(".lineTwo").value;
-  newEmployee.address.city = document.querySelector(".city").value;
-  var selectState = document.getElementById("state");
+  newEmployee.address.lineOne = document.getElementById("lineOne").value;
+  newEmployee.address.lineTwo = document.getElementById("lineTwo").value;
+  newEmployee.address.city = document.getElementById("modalCity").value;
+  var selectState = document.getElementById("modalState");
   newEmployee.address.state =
     selectState.options[selectState.selectedIndex].text;
-  newEmployee.address.pincode = document.querySelector(".pin").value;
+  newEmployee.address.pincode = document.getElementById("modalPin").value;
 
-  var selectId = document.getElementById("idType");
-  newEmployee.id.idType = selectId.options[selectId.selectedIndex].value;
-  newEmployee.id.idNumber = document.getElementById("idvalue").value;
+  var selectId = document.getElementById("modalIdType");
+  newEmployee.identity.idType = selectId.options[selectId.selectedIndex].value;
+  newEmployee.identity.idNumber = document.getElementById("modalIdValue").value;
+  
 
-  if (
-    newEmployee.name.first &&
-    newEmployee.name.last &&
-    newEmployee.emailId &&
-    newEmployee.phoneNumber &&
-    newEmployee.age &&
-    newEmployee.team &&
-    newEmployee.manager &&
-    newEmployee.address.lineOne &&
-    newEmployee.address.city &&
-    newEmployee.address.pincode &&
-    newEmployee.id.idNumber
-  ) {
-    if (
-      !isNaN(parseInt(newEmployee.age, 10)) &&
-      parseInt(newEmployee.age, 10) > 0
-    ) {
-      var mes = "";
-      if (newEmployee.id.idType === "Aadhar Card") {
-        var regex = /^[2-9]\d{3}[\s-]?\d{4}[\s-]?\d{4}$/;
-        if (!regex.test(newEmployee.id.idNumber)) msg = "Enter Valid Aadhar";
-        else msg = "";
-      }
+  // console.log(empid);
+  // sleep(100);
 
-      if (newEmployee.id.idType === "Pan Card") {
-        var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-        if (!regex.test(newEmployee.id.idNumber)) msg = "Enter Valid PAN";
-        else msg = "";
-      }
-      if (newEmployee.id.idType === "Driving Licence") {
-        //     Where:
-        // ^ represents the starting of the string.
-        // ( represents the starting of group 1.
-        // ( represents the starting of group 2.
-        // [A-Z]{2} represents the first two characters should be upper case alphabets.
-        // [0-9]{2} represents the next two characters should be digits.
-        // ) represents the ending of the group 2.
-        // ( ) represents the white space character.
-        // | represents the or.
-        // ( represents the starting of group 3.
-        // [A-Z]{2} represents the first two characters should be upper case alphabets.
-        // – represents the hyphen.
-        // [0-9]{2} represents the next two characters should be digits.
-        // ) represents the ending of the group 3.
-        // ) represents the ending of the group 1.
-        // ((19|20)[0-9][0-9]) represents the year from 1900-2099.
-        // [0-9]{7} represents the next seven characters should be any digits from 0-9.
-        // $ represents the ending of the string.
-        var regex =
-          /^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$/;
-        if (!regex.test(newEmployee.id.idNumber))
-          msg = "Enter Valid Driving Licence number";
-        else msg = "";
-      }
+  console.log(newEmployee);
+  //validation
+   if (newEmployee.name.first && newEmployee.name.last && newEmployee.emailId && newEmployee.phoneNumber && newEmployee.age && newEmployee.team && newEmployee.manager && newEmployee.address.lineOne && newEmployee.address.city && newEmployee.address.pincode && newEmployee.identity.idNumber ) {
+      if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newEmployee.emailId)){
 
-      {
-        if((newEmployee.address.pincode))
-        var regex=/^[1-9]{1}[0-9]{2}[0-9]{3}$/;
-          if(!regex.test(newEmployee.address.pincode))
-            msg="Enter valid pincode";
-          else
-            msg='';
-      }
-      
-      if (msg != "") alert(msg);
+        if (!isNaN(parseInt(newEmployee.age, 10)) && parseInt(newEmployee.age, 10) > 0) {
+          var msg = "";
+          if (newEmployee.identity.idType === "Aadhar Card" ) {
+            var regex = /^[2-9]\d{3}\d{4}\d{4}$/;
+            if (!regex.test(newEmployee.identity.idNumber) || !(newEmployee.identity.idNumber.length === 12)) msg = "Enter Valid Aadhar";
+            else msg = "";
+          }
+
+          if (newEmployee.identity.idType === "Pan Card") {
+            var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+            if (!regex.test(newEmployee.identity.idNumber)) msg = "Enter Valid PAN";
+            else msg = "";
+          }
+          
+          if (newEmployee.identity.idType === "Driving Licence") {
+            var regex =
+              /^(([A-Z]{2}[0-9]{2})( )|([A-Z]{2}-[0-9]{2}))((19|20)[0-9][0-9])[0-9]{7}$/;
+            if (!regex.test(newEmployee.identity.idNumber))
+              msg = "Enter Valid Driving Licence number";
+            else msg = "";
+          }
+          if (msg != "") 
+            alert(msg);
+          else if((newEmployee.address.pincode))
+          {
+            var regex=/^[1-9]{1}[0-9]{2}[0-9]{3}$/;
+            if(!regex.test(newEmployee.address.pincode))
+              alert("Enter valid pincode");
+            else{
+               //creatinmg id of new employee
+               const lastId = localStorage.getItem("lastEmpId") || 1000;
+               newEmployee.id = lastId +1;
+               localStorage.setItem('lastEmpId',newEmployee.id);
+
+              var employee = JSON.parse(localStorage.getItem("employee"));
+              employee.push(newEmployee);
+
+              localStorage.setItem("employee", JSON.stringify(employee));
+              
+              document.querySelector(".bg-modal").style.display = "none";
+              location.reload();
+            }
+          }
+      } 
       else {
-        var employee = JSON.parse(localStorage.getItem("employee"));
-        employee.push(newEmployee);
-        localStorage.setItem("employee", JSON.stringify(employee));
-        document.querySelector(".bg-modal").style.display = "none";
-        location.reload();
+        alert("Enter a valid Age !!!!!");
       }
-    } else {
-      alert("Enter a valid Age !!!!!");
-    }
-  } else {
+        
+      }else{
+        alert("Enter a valid EmailId")
+      }
+  } 
+  else{
     alert("please Enter all details!!!!!");
   }
 });

@@ -19,7 +19,8 @@
                 "state": "Uttar Pradesh",
                 "pincode": 123456
             },
-            "id": {
+            "id": 1,
+            "identity": {
                 "idType": "Aadhar Card",
                 "idNumber": "01234567898432"
             }
@@ -43,7 +44,8 @@
                 "state": "Uttar Pradesh",
                 "pincode": 123456
             },
-            "id": {
+            "id": 2,
+            "identity": {
                 "idType": "Pan Card",
                 "idNumber": "BYMPT1234GH"
             }
@@ -67,7 +69,8 @@
                 "state": "Uttar Pradesh",
                 "pincode": 123456
             },
-            "id": {
+            "id": 3,
+            "identity": {
                 "idType": "Aadhar Card",
                 "idNumber": "01234567898432"
             }
@@ -91,7 +94,8 @@
                 "state": "Uttar Pradesh",
                 "pincode": 123456
             },
-            "id": {
+            "id": 4,
+            "identity": {
                 "idType": "Pan Card",
                 "idNumber": "BYMPT1234GH"
             }
@@ -115,7 +119,8 @@
                 "state": "Telangana",
                 "pincode": 123456
             },
-            "id": {
+            "id": 5,
+            "identity": {
                 "idType": "Aadhar Card",
                 "idNumber": "01234567898432"
             }
@@ -139,7 +144,8 @@
                 "state": "Telangana",
                 "pincode": 123456
             },
-            "id": {
+            "id": 6,
+            "identity": {
                 "idType": "Pan Card",
                 "idNumber": "BYMPT1234GH"
             }
